@@ -1,0 +1,11 @@
+[Unit]
+Description=dnsmask-hack
+ConditionPathExists=/root/bin/dnsmasq-hack.sh
+After=dnsmasq.service
+ 
+[Service]
+Type=simple
+ExecStart=/root/bin/dnsmasq-hack.sh
+
+[Install]
+WantedBy=multi-user.target

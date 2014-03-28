@@ -1,0 +1,19 @@
+These are some scripts for dealing with the problem of retaining local
+DNS resolution when connecting to a VPN.  We run dnsmasq locally and
+use inotify to make sure that our local instance is always the first
+entry in resolv.conf.  Changes to resolv.conf are scraped to configure
+dnsmasq to dynamically add and remove servers and domains.
+
+To use:
+ - Make sure you have inotifywait
+ - Using dnsmasq.conf, setup dnsmasq to run at startup
+ - Run dnsmask-hack.sh at startup however you wish.
+   - It needs to be able to write /etc/resolv.conf
+   - An @reboot crontab entry for root works
+   - Run from systemd using the included .service file
+     (note it assumes you've copied dnsmasq-hack.sh to /root/bin)
+
+The kick script is meant to clear dnsmasq cache, which is often enough
+to get things working again when dnsmasq gets confused.
+
+Feeback and improvements to Alex Williamson <alex.williamson@redhat.com>
